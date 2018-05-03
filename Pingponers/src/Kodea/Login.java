@@ -20,4 +20,22 @@ public class Login {
 	}
 	 return false;
  }
+	public boolean createUser(String user, String password) {
+		 boolean libre = true;
+		 String query = "Select user from Pingponers.Erabiltzaileak where User='"+user+"');"; 
+		 ResultSet rs = DBKudeatzailea.getInstantzia().execSQL(query);
+		 try {
+			while(rs.next()) {
+				 if(rs.getString("user").equals(user)) {
+					 libre= false;
+				 }
+			 }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			}
+		 if (libre) {
+			 query = "INSERT INTO Pingponers.Erabiltzaileak () VALUES ('"+user+"','"+password+"');";
+		 }
+		return libre;
+	}
 }
