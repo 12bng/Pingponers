@@ -42,6 +42,7 @@ public class DBKudeatzailea {
 		ResultSet rs = null;
 
 		try {
+			//System.out.println(query);
 			rs = s.executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();

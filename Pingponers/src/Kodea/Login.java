@@ -7,11 +7,11 @@ import konektorea.DBKudeatzailea;
 
 public class Login {
  public boolean login(String user, String password) {
-	 String query = "Select user from Pingponers.Erabiltzaileak where User='"+user+"' and Password='"+password+"');"; //TODO
+	 String query = "Select Erabiltzailea from Erabiltzaileak where Erabiltzailea='"+user+"' and Password='"+password+"';"; //TODO
 	 ResultSet rs = DBKudeatzailea.getInstantzia().execSQL(query);
 	 try {
 		while(rs.next()) {
-			 if(rs.getString("user").equals(user)) {
+			 if(rs.getString("Erabiltzailea").equals(user)) {
 				 return true;
 			 }
 		 }
@@ -22,11 +22,11 @@ public class Login {
  }
 	public boolean createUser(String user, String password) {
 		 boolean libre = true;
-		 String query = "Select user from Pingponers.Erabiltzaileak where User='"+user+"');"; 
+		 String query = "Select Erabiltzailea from Erabiltzaileak where Erabiltzailea='"+user+"';"; 
 		 ResultSet rs = DBKudeatzailea.getInstantzia().execSQL(query);
 		 try {
 			while(rs.next()) {
-				 if(rs.getString("user").equals(user)) {
+				 if(rs.getString("Erabiltzailea").equals(user)) {
 					 libre= false;
 				 }
 			 }
@@ -34,7 +34,8 @@ public class Login {
 			e.printStackTrace();
 			}
 		 if (libre) {
-			 query = "INSERT INTO Pingponers.Erabiltzaileak () VALUES ('"+user+"','"+password+"');";
+			 query = "INSERT INTO Erabiltzaileak VALUES ('"+user+"','"+password+"');";
+			 DBKudeatzailea.getInstantzia().execSQL(query);
 		 }
 		return libre;
 	}

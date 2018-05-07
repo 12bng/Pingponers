@@ -11,15 +11,24 @@ import Kodea.Main;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
 public class ILogin extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JRadioButton rdbtnCastellano;
+	private JRadioButton rdbtnEuskera;
+	private ButtonGroup lengoaia;
+	private JButton btnSartu;
+	private JButton btnErabiltzaileBerria;
+	private JLabel lblIzena;
+	private JLabel lblPasahitza;
 
 	/**
 	 * Launch the application.
@@ -43,7 +52,7 @@ public class ILogin extends JFrame {
 	public ILogin() {
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 271, 215);
+		setBounds(100, 100, 458, 215);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -53,28 +62,34 @@ public class ILogin extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		JLabel lblIzena = new JLabel("Izena:");
-		lblIzena.setBounds(27, 28, 46, 14);
+		lblIzena = new JLabel("Izena:");
+		lblIzena.setBounds(27, 28, 89, 14);
 		panel.add(lblIzena);
 		
 		textField = new JTextField();
-		textField.setBounds(114, 25, 86, 20);
+		textField.setBounds(141, 25, 86, 20);
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblPasahitza = new JLabel("Pasahitza:");
-		lblPasahitza.setBounds(27, 62, 64, 14);
+		lblPasahitza = new JLabel("Pasahitza:");
+		lblPasahitza.setBounds(27, 62, 89, 14);
 		panel.add(lblPasahitza);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(114, 59, 86, 20);
+		textField_1.setBounds(141, 59, 86, 20);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JButton btnSartu = new JButton("Sartu");
+		btnSartu = new JButton("Sartu");
 		btnSartu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Main.getMain().login(textField.getText(), textField_1.getText())) {
+					if (rdbtnCastellano.isSelected()) {
+						Main.getMain().setLengoaia("Castellano");
+					}
+					else if (rdbtnEuskera.isSelected()) {
+						Main.getMain().setLengoaia("Euskera");
+					}
 					dispose();
 				}
 			}
@@ -82,12 +97,52 @@ public class ILogin extends JFrame {
 		btnSartu.setBounds(27, 121, 89, 23);
 		panel.add(btnSartu);
 		
-		JButton btnErabiltzaileBerria = new JButton("Berria");
+		btnErabiltzaileBerria = new JButton("Berria");
 		btnErabiltzaileBerria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Main.getMain().createUser(textField.getText(), textField_1.getText());
 			}
 		});
 		btnErabiltzaileBerria.setBounds(138, 121, 89, 23);
 		panel.add(btnErabiltzaileBerria);
+		
+		rdbtnCastellano = new JRadioButton("Castellano");
+		rdbtnCastellano.setBounds(300, 24, 109, 23);
+		rdbtnCastellano.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				eguneratu();
+			}
+		});
+		panel.add(rdbtnCastellano);
+		
+		rdbtnEuskera = new JRadioButton("Euskera");
+		rdbtnEuskera.setBounds(300, 58, 109, 23);
+		rdbtnEuskera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				eguneratu();
+			}
+		});
+		panel.add(rdbtnEuskera);
+		
+		lengoaia = new ButtonGroup();
+		lengoaia.add(rdbtnCastellano);
+		lengoaia.add(rdbtnEuskera);
+		rdbtnEuskera.setSelected(true);
+	}
+	
+	private void eguneratu() {
+		if (rdbtnCastellano.isSelected()) {
+			btnSartu.setText("Entrar");
+			btnErabiltzaileBerria.setText("Nuevo");
+			lblIzena.setText("Nombre");
+			lblPasahitza.setText("Contraseña");
+		}
+		else if (rdbtnEuskera.isSelected()) {
+			btnSartu.setText("Sartu");
+			btnErabiltzaileBerria.setText("Berria");
+			lblIzena.setText("Izena");
+			lblPasahitza.setText("Pasahitza");
+		}
+		this.repaint();
 	}
 }
