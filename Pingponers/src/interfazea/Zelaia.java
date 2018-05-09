@@ -18,10 +18,14 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 	private Pilota pilota;
 	private Paleta jokalari1, jokalari2;
 	private Graphics2D g2d;
+	private String lengoaia;
+	private String jokoMota;
 	Timer timer;
 	
-	public Zelaia() {
+	public Zelaia(String pLengoaia, String pJokoMota) {
 		this.setBackground(Color.BLACK);
+		lengoaia = pLengoaia;
+		jokoMota = pJokoMota;
 		pilota = new Pilota(490, 290);
 		jokalari1 = new Paleta (25, 0);
 		jokalari2 = new Paleta (975,0);

@@ -90,10 +90,19 @@ public class ILogin extends JFrame {
 		btnSartu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Main.getMain().login(textField.getText(), textField_1.getText())) {
+					if(rdbtnJokalariVsIa.isSelected()) {
+						Main.getMain().setJokoMota("JokalariVsIa");
+					}
+					if(rdbtnJokalariVsIa_1.isSelected()) {
+						Main.getMain().setJokoMota("JokalariVsIa_1");
+					}
+					if(rdbtnJokalariVsJokalari.isSelected()) {
+						Main.getMain().setJokoMota("JokalariVsJokalari");
+					}
 					if (rdbtnCastellano.isSelected()) {
 						Main.getMain().setLengoaia("Castellano");
 					}
-					else if (rdbtnEuskera.isSelected()) {
+					if (rdbtnEuskera.isSelected()) {
 						Main.getMain().setLengoaia("Euskera");
 					}
 					dispose();

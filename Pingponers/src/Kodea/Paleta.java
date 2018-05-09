@@ -34,7 +34,6 @@ public class Paleta {
 	}
 
 	public void eguneratu(Graphics2D g2d) {
-		// TODO Auto-generated method stub
 		g2d.fill(getPaleta());
 	}
 
@@ -46,5 +45,8 @@ public class Paleta {
 		if ((y<600 - 140)&&(noranzkoa.equals("Behera"))) {
 			y=y+3;
 		}
+	}
+	public void IA() {
+		
 	}
 }

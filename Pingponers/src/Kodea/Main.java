@@ -6,6 +6,7 @@ import interfazea.LeihoNagusia;
 public class Main {
 	private static Main main;
 	private String lengoaia;
+	private String jokoMota;
 	
 	public static Main getMain() {
 	
@@ -25,10 +26,11 @@ public class Main {
 	public boolean login(String user, String password) {
 		Login login = new Login();
 		if(login.login(user, password)) {
-			//TODO
-			//lamar la nueva interfaz
 			System.out.println("Kaixo " + user);
-			LeihoNagusia.main(null);
+			String[] aldagaiak = new String[2];
+			aldagaiak[0] = lengoaia;
+			aldagaiak[1] = jokoMota;
+			LeihoNagusia.main(aldagaiak);
 			return true;
 		}
 		else {
@@ -52,5 +54,8 @@ public class Main {
 	
 	public void setLengoaia(String pLengoaia) {
 		lengoaia = pLengoaia;
+	}
+	public void setJokoMota(String pJokoMota) {
+		jokoMota = pJokoMota;
 	}
 }
