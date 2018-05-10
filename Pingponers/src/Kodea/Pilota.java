@@ -10,8 +10,8 @@ public class Pilota {
 	private Ellipse2D.Double irudia;
 	private String bertikal;
 	private String horizontal;
-	private int j1=9;
-	private int j2=9;
+	private int j1=0;
+	private int j2=0;
 	
 	public Pilota(int pX, int pY) {
 		this.x = pX;
