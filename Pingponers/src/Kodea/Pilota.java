@@ -10,6 +10,8 @@ public class Pilota {
 	private Ellipse2D.Double irudia;
 	private String bertikal;
 	private String horizontal;
+	private int j1=0;
+	private int j2=0;
 	
 	public Pilota(int pX, int pY) {
 		this.x = pX;
@@ -48,12 +50,17 @@ public class Pilota {
 	}
 
 	private void noranzkoaEguneratu() {
-		// TODO Auto-generated method stub
 		if (x<=0){
 			horizontal = "eskuina";
+			j2++;
+			x = 490;
+			y = 290;
 		}
 		if (x>=1000){
 			horizontal = "ezkerra";
+			j1++;
+			x = 490;
+			y = 290;
 		}
 		if (y<=0){
 			bertikal = "behera";
@@ -67,5 +74,12 @@ public class Pilota {
 		// TODO Auto-generated method stub
 		g2d.fill(getPilota());
 	}
-	
+	public void noranzkoaAldatu() {
+		if (horizontal.equals("eskuina")){
+			horizontal="ezkerra";
+		}
+		else if (horizontal.equals("ezkerra")){
+			horizontal="eskuina";
+		}	
+	}
 }

@@ -105,6 +105,7 @@ public class ILogin extends JFrame {
 					if (rdbtnEuskera.isSelected()) {
 						Main.getMain().setLengoaia("Euskera");
 					}
+					Main.getMain().nireLehioNagusia();
 					dispose();
 				}
 			}

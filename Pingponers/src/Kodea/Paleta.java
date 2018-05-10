@@ -27,7 +27,12 @@ public class Paleta {
 	public void ezMugitu() {
 		noranzkoa = "Geldirik";
 	}
-	
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
 	public Rectangle2D.Double getPaleta() {
 		this.irudia = new Rectangle2D.Double(x, y, 15, 130);
 		return irudia;
@@ -46,7 +51,19 @@ public class Paleta {
 			y=y+3;
 		}
 	}
-	public void IA() {
-		
+	public void IAeasy() {
+		if (y<=0) {
+			beheraMugitu();
+		}
+		if(y>=460) {
+			goraMugitu();
+		}
+		mugitu();
+	}
+	public void IAhard(int pilotaPos) {
+		if(pilotaPos>460) {
+			y = 460;
+		}
+		else{y = pilotaPos-10;}
 	}
 }

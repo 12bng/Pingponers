@@ -7,7 +7,7 @@ public class Main {
 	private static Main main;
 	private String lengoaia;
 	private String jokoMota;
-	
+	private LeihoNagusia nire_Lehioa;
 	public static Main getMain() {
 	
 		if (main == null) {
@@ -30,7 +30,6 @@ public class Main {
 			String[] aldagaiak = new String[2];
 			aldagaiak[0] = lengoaia;
 			aldagaiak[1] = jokoMota;
-			LeihoNagusia.main(aldagaiak);
 			return true;
 		}
 		else {
@@ -57,5 +56,8 @@ public class Main {
 	}
 	public void setJokoMota(String pJokoMota) {
 		jokoMota = pJokoMota;
+	}
+	public void nireLehioNagusia() {
+		nire_Lehioa = new LeihoNagusia(lengoaia, jokoMota);
 	}
 }

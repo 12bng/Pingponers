@@ -27,8 +27,8 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 		lengoaia = pLengoaia;
 		jokoMota = pJokoMota;
 		pilota = new Pilota(490, 290);
-		jokalari1 = new Paleta (25, 0);
-		jokalari2 = new Paleta (975,0);
+		jokalari1 = new Paleta (30, 0); //(25, 0)
+		jokalari2 = new Paleta (970,460); //(975,0)
 		timer = new Timer(5, this);
 		timer.setInitialDelay(100);
         timer.start();
@@ -45,6 +45,18 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 		g2d.setColor(Color.WHITE);
 		jokalari1.eguneratu(g2d);
 		jokalari2.eguneratu(g2d);
+		
+		//comprobar las posiciones, las paletas son de 130
+		if(pilota.getX()<=jokalari1.getX()) {
+			if(pilota.getY()>=jokalari1.getY()&&pilota.getY()<=(jokalari1.getY()+130)) {
+				pilota.noranzkoaAldatu();
+			}
+		}
+		if(pilota.getX()>=jokalari2.getX()) {
+			if(pilota.getY()>=jokalari2.getY()&&pilota.getY()<=(jokalari2.getY()+130)) {
+				pilota.noranzkoaAldatu();
+			}
+		}
 	}
 	
 	public void eguneratu() {
@@ -59,12 +71,14 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 		if(e.VK_S == e.getKeyCode()) {
 			jokalari1.beheraMugitu();
 		}
-		if(e.VK_UP == e.getKeyCode()) {
-			jokalari2.goraMugitu();
+		if(jokoMota.equals("JokalariVsJokalari")){
+			if(e.VK_UP == e.getKeyCode()) {
+				jokalari2.goraMugitu();
+			}
+			if(e.VK_DOWN == e.getKeyCode()) {
+				jokalari2.beheraMugitu();
+			}
 		}
-		if(e.VK_DOWN == e.getKeyCode()) {
-			jokalari2.beheraMugitu();
-		}	
 		
 	}
 
@@ -77,11 +91,13 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 		if(e.VK_S == e.getKeyCode()) {
 			jokalari1.ezMugitu();
 		}
-		if(e.VK_UP == e.getKeyCode()) {
-			jokalari2.ezMugitu();
-		}
-		if(e.VK_DOWN == e.getKeyCode()) {
-			jokalari2.ezMugitu();
+		if(jokoMota.equals("JokalariVsJokalari")){
+			if(e.VK_UP == e.getKeyCode()) {
+				jokalari2.ezMugitu();
+			}
+			if(e.VK_DOWN == e.getKeyCode()) {
+				jokalari2.ezMugitu();
+			}
 		}
 	}
 
@@ -95,7 +111,15 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		pilota.mugitu();
 		jokalari1.mugitu();
-		jokalari2.mugitu();
+		if(jokoMota.equals("JokalariVsJokalari")){
+			jokalari2.mugitu();
+		}
+		if(jokoMota.equals("JokalariVsIa")){
+			jokalari2.IAeasy();
+		}
+		if(jokoMota.equals("JokalariVsIa_1")){//TODO
+			jokalari2.IAhard(pilota.getY());
+		}	
 		eguneratu();
 	}
 }
