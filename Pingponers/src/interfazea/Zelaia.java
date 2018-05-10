@@ -1,12 +1,15 @@
 package interfazea;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.Rectangle2D;
+
 import javax.swing.Timer;
 import javax.swing.JPanel;
 
@@ -43,6 +46,7 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 		g2d.setColor(Color.RED);
 		pilota.eguneratu(g2d);
 		g2d.setColor(Color.WHITE);
+		g2d.fill(new Rectangle2D.Double(525, 0, 15, 600));
 		jokalari1.eguneratu(g2d);
 		jokalari2.eguneratu(g2d);
 		
@@ -56,6 +60,29 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 			if(pilota.getY()>=jokalari2.getY()&&pilota.getY()<=(jokalari2.getY()+130)) {
 				pilota.noranzkoaAldatu();
 			}
+		}
+		int j1 = pilota.getJ1Puntuak();
+		int j2 = pilota.getJ2Puntuak();
+		if(((j1 < 10) && (j2 < 10))){
+			String puntuakJ1 = Integer.toString(j1);
+			String puntuakJ2 = Integer.toString(j2);
+			g2d.setFont(new Font("Consolas", Font.PLAIN, 100));
+			g2d.drawString(puntuakJ1, 400, 100);
+			g2d.drawString(puntuakJ2, 600, 100);
+		}
+		else if ((j1 < 10) && (j2 >= 10)) {
+			String puntuakJ1 = Integer.toString(j1);
+			String puntuakJ2 = Integer.toString(j2);
+			g2d.setFont(new Font("Consolas", Font.PLAIN, 100));
+			g2d.drawString(puntuakJ1, 400, 100);
+			g2d.drawString(puntuakJ2, 600, 100);
+		}
+		else {
+			String puntuakJ1 = Integer.toString(j1);
+			String puntuakJ2 = Integer.toString(j2);
+			g2d.setFont(new Font("Consolas", Font.PLAIN, 100));
+			g2d.drawString(puntuakJ1, 360, 100);
+			g2d.drawString(puntuakJ2, 590, 100);
 		}
 	}
 	
