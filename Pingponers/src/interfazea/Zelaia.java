@@ -66,21 +66,33 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 		if(((j1 < 10) && (j2 < 10))){
 			String puntuakJ1 = Integer.toString(j1);
 			String puntuakJ2 = Integer.toString(j2);
-			g2d.setFont(new Font("Consolas", Font.PLAIN, 100));
+			g2d.setFont(new Font("Consolas", Font.PLAIN, 70));
 			g2d.drawString(puntuakJ1, 400, 100);
 			g2d.drawString(puntuakJ2, 600, 100);
 		}
 		else if ((j1 < 10) && (j2 >= 10)) {
+			String puntuakJ2 = "Winner";
+			if(lengoaia.equals("Euskera")) {
+				puntuakJ2 = "Irabazlea";
+			}
+			if(lengoaia.equals("Castellano")) {
+				puntuakJ2 = "Ganador";
+			}
 			String puntuakJ1 = Integer.toString(j1);
-			String puntuakJ2 = Integer.toString(j2);
-			g2d.setFont(new Font("Consolas", Font.PLAIN, 100));
+			g2d.setFont(new Font("Consolas", Font.PLAIN, 70));
 			g2d.drawString(puntuakJ1, 400, 100);
 			g2d.drawString(puntuakJ2, 600, 100);
 		}
-		else {
-			String puntuakJ1 = Integer.toString(j1);
+		else if ((j2 < 10) && (j1 >= 10)) {
+			String puntuakJ1 = "Winner";
+			if(lengoaia.equals("Euskera")) {
+				puntuakJ1 = "Irabazlea";
+			}
+			if(lengoaia.equals("Castellano")) {
+				puntuakJ1 = "Ganador";
+			}
 			String puntuakJ2 = Integer.toString(j2);
-			g2d.setFont(new Font("Consolas", Font.PLAIN, 100));
+			g2d.setFont(new Font("Consolas", Font.PLAIN, 70));
 			g2d.drawString(puntuakJ1, 360, 100);
 			g2d.drawString(puntuakJ2, 590, 100);
 		}
