@@ -5,21 +5,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.TexturePaint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.swing.Timer;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -34,7 +26,6 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 	private String lengoaia;
 	private String jokoMota;
 	private Image img = null;
-    private TexturePaint imagePaint;
 	Timer timer;
 	
 	public Zelaia(String pLengoaia, String pJokoMota) {
