@@ -4,13 +4,23 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.TexturePaint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.Timer;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import Kodea.Paleta;
@@ -23,6 +33,8 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 	private Graphics2D g2d;
 	private String lengoaia;
 	private String jokoMota;
+	private Image img = null;
+    private TexturePaint imagePaint;
 	Timer timer;
 	
 	public Zelaia(String pLengoaia, String pJokoMota) {
@@ -46,7 +58,7 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 		g2d.setColor(Color.RED);
 		pilota.eguneratu(g2d);
 		g2d.setColor(Color.WHITE);
-		g2d.fill(new Rectangle2D.Double(525, 0, 15, 600));
+		g2d.fill(new Rectangle2D.Double(510, 0, 15, 600));
 		jokalari1.eguneratu(g2d);
 		jokalari2.eguneratu(g2d);
 		
@@ -82,6 +94,9 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 			g2d.setFont(new Font("Consolas", Font.PLAIN, 70));
 			g2d.drawString(puntuakJ1, 400, 100);
 			g2d.drawString(puntuakJ2, 600, 100);
+			this.getImage();
+			g2d.drawImage(img,650,200,this);
+			timer.stop();
 		}
 		else if ((j2 < 10) && (j1 >= 10)) {
 			String puntuakJ1 = "Winner";
@@ -93,14 +108,22 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 			}
 			String puntuakJ2 = Integer.toString(j2);
 			g2d.setFont(new Font("Consolas", Font.PLAIN, 70));
-			g2d.drawString(puntuakJ1, 360, 100);
+			g2d.drawString(puntuakJ1, 100, 100);
 			g2d.drawString(puntuakJ2, 590, 100);
+			this.getImage();
+			g2d.drawImage(img,150,200,this);
+			timer.stop();
 		}
 	}
 	
 	public void eguneratu() {
 		repaint();
 	}
+	
+	public void getImage() {
+		img = new ImageIcon (getClass().getResource("/pictures/dance.gif")).getImage();
+	}
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
