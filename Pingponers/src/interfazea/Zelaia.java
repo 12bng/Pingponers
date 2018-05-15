@@ -15,6 +15,8 @@ import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import Kodea.Main;
+import Kodea.Oztopo;
 import Kodea.Paleta;
 import Kodea.Pilota;
 
@@ -64,14 +66,56 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 				pilota.noranzkoaAldatu();
 			}
 		}
+		Oztopo[] nireoztopoak = Main.getMain().getOztopoak();
 		int j1 = pilota.getJ1Puntuak();
 		int j2 = pilota.getJ2Puntuak();
 		if(((j1 < 10) && (j2 < 10))){
+			if(!(nireoztopoak[0]==null)) {
+				String kolor = nireoztopoak[0].getKolorea();
+				if(kolor=="WHITE") {
+					g2d.setColor(Color.WHITE);
+				}
+				if(kolor=="GREEN") {
+					g2d.setColor(Color.GREEN);
+				}
+				if(kolor=="RED") {
+					g2d.setColor(Color.RED);
+				}
+				nireoztopoak[0].eguneratu(g2d);
+			}
+			if(!(nireoztopoak[1]==null)) {
+					String kolor = nireoztopoak[1].getKolorea();
+					if(kolor=="WHITE") {
+						g2d.setColor(Color.WHITE);
+					}
+					if(kolor=="GREEN") {
+						g2d.setColor(Color.GREEN);
+					}
+					if(kolor=="RED") {
+						g2d.setColor(Color.RED);
+					}
+					nireoztopoak[1].eguneratu(g2d);
+			}
+			if(!(nireoztopoak[2]==null)) {
+					String kolor = nireoztopoak[2].getKolorea();
+					if(kolor=="WHITE") {
+						g2d.setColor(Color.WHITE);
+					}
+					if(kolor=="GREEN") {
+						g2d.setColor(Color.GREEN);
+					}
+					if(kolor=="RED") {
+						g2d.setColor(Color.RED);
+					}
+					nireoztopoak[2].eguneratu(g2d);
+			}
 			String puntuakJ1 = Integer.toString(j1);
 			String puntuakJ2 = Integer.toString(j2);
+			g2d.setColor(Color.WHITE);
 			g2d.setFont(new Font("Consolas", Font.PLAIN, 70));
 			g2d.drawString(puntuakJ1, 400, 100);
 			g2d.drawString(puntuakJ2, 600, 100);
+			
 		}
 		else if ((j1 < 10) && (j2 >= 10)) {
 			String puntuakJ2 = "Winner";
