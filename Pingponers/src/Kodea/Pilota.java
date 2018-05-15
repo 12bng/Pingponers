@@ -5,13 +5,14 @@ import java.awt.geom.Ellipse2D;
 
 public class Pilota {
 
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	private Ellipse2D.Double irudia;
 	private String bertikal;
 	private String horizontal;
 	private int j1=0;
 	private int j2=0;
+	private double abiadura = 2.0;
 	
 	public Pilota(int pX, int pY) {
 		this.x = pX;
@@ -25,11 +26,27 @@ public class Pilota {
 		return irudia;
 	}
 	
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 	
-	public int getY() {
+	public double getAbiadura() {
+		return abiadura;
+	}
+	
+	public void setAbiadura(String mota) {
+		if (mota.equals("azkartu")) {
+			abiadura = abiadura*2;
+		}
+		if (mota.equals("moteldu")) {
+			abiadura = abiadura/2;
+		}
+		if (mota.equals("reset")) {
+			abiadura = 2;
+		}
+	}
+	
+	public double getY() {
 		return y;
 	}
 	public int getJ1Puntuak(){
@@ -41,16 +58,16 @@ public class Pilota {
 	public void mugitu() {
 		noranzkoaEguneratu();
 		if (bertikal.equals("behera")) {
-			y = y + 2;
+			y = y + abiadura;
 		}
 		if (bertikal.equals("gora")) {
-			y = y - 2;
+			y = y - abiadura;
 		}
 		if (horizontal.equals("ezkerra")) {
-			x = x - 2;
+			x = x - abiadura;
 		}
 		if (horizontal.equals("eskuina")) {
-			x = x + 2;
+			x = x + abiadura;
 		}
 	}
 
@@ -58,12 +75,14 @@ public class Pilota {
 		if (x<=0){
 			horizontal = "eskuina";
 			j2++;
+			abiadura = 2;
 			x = 490;
 			y = 290;
 		}
 		if (x>=1000){
 			horizontal = "ezkerra";
 			j1++;
+			abiadura = 2;
 			x = 490;
 			y = 290;
 		}

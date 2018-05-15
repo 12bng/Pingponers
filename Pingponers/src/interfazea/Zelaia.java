@@ -13,6 +13,7 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import Kodea.Main;
@@ -29,6 +30,8 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 	private String jokoMota;
 	private Image img = null;
 	Timer timer;
+	private JButton ranking;
+	private boolean amaituta = false;
 	
 	public Zelaia(String pLengoaia, String pJokoMota) {
 		this.setBackground(Color.BLACK);
@@ -42,6 +45,19 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
         timer.start();
         addKeyListener(this);
         setFocusable(true);
+        ranking = new JButton("Ranking");
+        ranking.setBounds(500, 300, 50, 50);
+        ranking.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Ranking.main(null);
+			}
+		});
+        this.add(ranking);
+        ranking.setVisible(false);
+        ranking.setEnabled(false);
 	}
 	
 	@Override
@@ -51,22 +67,46 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 		g2d.setColor(Color.RED);
 		pilota.eguneratu(g2d);
 		g2d.setColor(Color.WHITE);
-		g2d.fill(new Rectangle2D.Double(510, 0, 15, 600));
+		g2d.fill(new Rectangle2D.Double(510, 0, 5, 600));
 		jokalari1.eguneratu(g2d);
 		jokalari2.eguneratu(g2d);
 		
 		//comprobar las posiciones, las paletas son de 130
-		if(pilota.getX()<=jokalari1.getX()) {
+		if((pilota.getX()-10)<=jokalari1.getX()) {
 			if(pilota.getY()>=jokalari1.getY()&&pilota.getY()<=(jokalari1.getY()+130)) {
 				pilota.noranzkoaAldatu();
 			}
 		}
-		if(pilota.getX()>=jokalari2.getX()) {
+		if((pilota.getX()+10)>=jokalari2.getX()) {
 			if(pilota.getY()>=jokalari2.getY()&&pilota.getY()<=(jokalari2.getY()+130)) {
 				pilota.noranzkoaAldatu();
 			}
 		}
+		
+		//comprobar si toca un oztopo
 		Oztopo[] nireoztopoak = Main.getMain().getOztopoak();
+		for (int i=0;i<3;i++) {
+			if(!(nireoztopoak[i]==null)) {
+				if((pilota.getX()<=nireoztopoak[i].getX()+30)&&(pilota.getX()+10>=nireoztopoak[i].getX())){
+					if(pilota.getY()+10>=nireoztopoak[i].getY()&&pilota.getY()<=(nireoztopoak[i].getY()+30)) {
+						String kolorea = nireoztopoak[i].getKolorea();
+						if (kolorea.equals("WHITE")) {
+							pilota.noranzkoaAldatu();
+							pilota.setAbiadura("reset");
+						}
+						else if (kolorea.equals("GREEN")) {
+							pilota.setAbiadura("azkartu");
+						}
+						else if (kolorea.equals("RED")) {
+							pilota.setAbiadura("moteldu");
+						}
+						Main.getMain().oztopoaKendu(i);
+					}
+				}
+			}
+			
+		}
+		
 		int j1 = pilota.getJ1Puntuak();
 		int j2 = pilota.getJ2Puntuak();
 		if(((j1 < 10) && (j2 < 10))){
@@ -132,6 +172,12 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 			this.getImage();
 			g2d.drawImage(img,650,200,this);
 			timer.stop();
+			if (!amaituta) {
+				Main.getMain().puntuakGorde(Main.getMain().getUser() + "_2",j2-j1,jokoMota);
+				amaituta = true;
+			}
+			ranking.setEnabled(true);
+			ranking.setVisible(true);
 		}
 		else if ((j2 < 10) && (j1 >= 10)) {
 			String puntuakJ1 = "Winner";
@@ -148,6 +194,12 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 			this.getImage();
 			g2d.drawImage(img,150,200,this);
 			timer.stop();
+			if (!amaituta) {
+				Main.getMain().puntuakGorde(Main.getMain().getUser(),j1-j2,jokoMota);
+				amaituta = true;
+			}
+			ranking.setEnabled(true);
+			ranking.setVisible(true);
 		}
 	}
 	

@@ -25,8 +25,8 @@ public class Oztopo {
 		randomPosition();
 	}
 	private void randomPosition() {
-		x = ThreadLocalRandom.current().nextInt(50, 951);
-		y = ThreadLocalRandom.current().nextInt(10, 451);
+		x = ThreadLocalRandom.current().nextInt(250, 751);
+		y = ThreadLocalRandom.current().nextInt(100, 551);
 	}
 	public int getX() {
 		return x;
@@ -35,7 +35,7 @@ public class Oztopo {
 		return y;
 	}
 	public Rectangle2D.Double getOztopoa() {
-		this.irudia = new Rectangle2D.Double(x, y, 15, 15);
+		this.irudia = new Rectangle2D.Double(x, y, 30, 30);
 		return irudia;
 	}
 	public void eguneratu(Graphics2D g2d) {

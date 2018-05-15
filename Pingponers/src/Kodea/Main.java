@@ -9,6 +9,7 @@ import javax.management.timer.Timer;
 
 import interfazea.ILogin;
 import interfazea.LeihoNagusia;
+import konektorea.DBKudeatzailea;
 
 public class Main {
 	private static Main main;
@@ -16,6 +17,8 @@ public class Main {
 	private String jokoMota;
 	private LeihoNagusia nire_Lehioa;
 	private Oztopo[] oztopoak = new Oztopo[3];
+	private String erabiltzailea;
+	
 	public static Main getMain() {
 	
 		if (main == null) {
@@ -34,7 +37,7 @@ public class Main {
 	public boolean login(String user, String password) {
 		Login login = new Login();
 		if(login.login(user, password)) {
-			System.out.println("Kaixo " + user);
+			erabiltzailea = user;
 			String[] aldagaiak = new String[2];
 			aldagaiak[0] = lengoaia;
 			aldagaiak[1] = jokoMota;
@@ -62,6 +65,10 @@ public class Main {
 		}
 	}
 	
+	public String getUser() {
+		return erabiltzailea;
+	}
+	
 	public void setLengoaia(String pLengoaia) {
 		lengoaia = pLengoaia;
 	}
@@ -73,7 +80,6 @@ public class Main {
 		temporizador();
 	}
 	private void temporizador() {
-		System.out.println("Timer start");
 		ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 		executor.scheduleAtFixedRate( ()-> {oztopoaGehitu();} , 0, 15, TimeUnit.SECONDS);
 
@@ -91,7 +97,6 @@ public class Main {
 				oztopoak[2]= new Oztopo();
 				oztopoak[2].randomObstacle();
 			}
-			System.out.println("Oztopoa gehitu da");
 	}
 	public void oztopoaKendu(int i) {
 		if(i==0) {
@@ -106,5 +111,28 @@ public class Main {
 	}
 	public Oztopo[] getOztopoak() {
 		return oztopoak;
+	}
+
+	public void puntuakGorde(String user, int puntuak, String jokoMota) {
+		// TODO Auto-generated method stub
+		int biderkatzailea = 0;
+		if (jokoMota.equals("JokalariVsJokalari")) {
+			biderkatzailea = 2;
+		}
+		if (jokoMota.equals("JokalariVsIa")) {
+			biderkatzailea = 1;
+		}
+		if (jokoMota.equals("JokalariVsIa_1")) {
+			biderkatzailea = 10;
+		}
+		String query = null;
+		if (erabiltzailea.equals(user)){
+			query = "insert into Puntuazioak(Erabiltzailea, Puntuazioa) values ('" + user + "', " + puntuak * biderkatzailea + ");";
+			DBKudeatzailea.getInstantzia().execSQL(query);
+		}
+		else if (jokoMota.equals("JokalariVsJokalari")){
+			query = "insert into Puntuazioak(Erabiltzailea, Puntuazioa) values ('" + user + "', " + puntuak * biderkatzailea + ");";
+			DBKudeatzailea.getInstantzia().execSQL(query);
+		}
 	}
 }

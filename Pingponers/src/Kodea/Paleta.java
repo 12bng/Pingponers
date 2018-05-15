@@ -5,8 +5,8 @@ import java.awt.geom.Rectangle2D;
 
 public class Paleta {
 
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	private Rectangle2D.Double irudia;
 	private String noranzkoa;
 	
@@ -27,10 +27,10 @@ public class Paleta {
 	public void ezMugitu() {
 		noranzkoa = "Geldirik";
 	}
-	public int getX() {
+	public double getX() {
 		return x;
 	}
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 	public Rectangle2D.Double getPaleta() {
@@ -60,10 +60,10 @@ public class Paleta {
 		}
 		mugitu();
 	}
-	public void IAhard(int pilotaPos) {
-		if(pilotaPos>460) {
+	public void IAhard(double d) {
+		if(d>460) {
 			y = 460;
 		}
-		else{y = pilotaPos-10;}
+		else{y = d-10;}
 	}
 }
