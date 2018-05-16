@@ -17,7 +17,7 @@ public class Pilota {
 	public Pilota(int pX, int pY) {
 		this.x = pX;
 		this.y = pY;
-		bertikal = "behera";
+		bertikal = "gora";
 		horizontal = "eskuina";
 	}
 	

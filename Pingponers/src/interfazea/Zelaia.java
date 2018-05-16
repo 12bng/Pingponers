@@ -64,7 +64,7 @@ public class Zelaia extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g2d = (Graphics2D)g;
-		g2d.setColor(Color.RED);
+		g2d.setColor(Color.WHITE);
 		pilota.eguneratu(g2d);
 		g2d.setColor(Color.WHITE);
 		g2d.fill(new Rectangle2D.Double(510, 0, 5, 600));
